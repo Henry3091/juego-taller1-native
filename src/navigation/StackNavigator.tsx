@@ -14,10 +14,12 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function StackNavigator() {
   return (
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName="Inicio">
+      
+      <Stack.Screen name="Inicio" component={InicioScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
-      <Stack.Screen name="Inicio" component={InicioScreen} options={{ headerShown: false }} />
+
     </Stack.Navigator>
   );
 }
