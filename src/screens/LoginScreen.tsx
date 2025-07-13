@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Alert } from 'react-native';
+import { Alert, StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { supabase } from '../supabase/client';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -37,11 +37,54 @@ export default function LoginScreen({ navigation }: Props) {
   };
 
   return (
-    <View>
-      <TextInput placeholder="Correo" value={email} onChangeText={setEmail} />
-      <TextInput placeholder="Contraseña" value={password} onChangeText={setPassword} secureTextEntry />
-      <Button title="Iniciar sesión" onPress={handleLogin} />
-      <Text onPress={() => navigation.navigate('Register')}>¿No tienes cuenta? Regístrate</Text>
+    <View style={styles.container}>
+      <TextInput
+        placeholder="Correo"
+        value={email}
+        onChangeText={setEmail}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="Contraseña"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={styles.input}
+      />
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Iniciar sesión</Text>
+      </TouchableOpacity>
+      <Text onPress={() => navigation.navigate('Register')} style={{ marginTop: 20, textAlign: 'center' }}>
+        ¿No tienes cuenta? Regístrate
+      </Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#f2f2f2',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    marginBottom: 15,
+    padding: 10,
+    backgroundColor: '#fff',
+  },
+  button: {
+    backgroundColor: '#007bff',
+    padding: 12,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+});
