@@ -1,28 +1,22 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button } from 'react-native';
 
 export default function GameScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.timer}>Tiempo: 30s</Text>
-      <Text style={styles.score}>Puntaje: 0</Text>
+  const [score, setScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(30);
 
-      <TouchableOpacity style={styles.insect}>
-        <TouchableOpacity style={styles.insect}>
-       <Text>JUEGO</Text>
-       </TouchableOpacity>
-      </TouchableOpacity>
+  useEffect(() => {
+    if (timeLeft === 0) return;
+    const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [timeLeft]);
+
+  return (
+    <View>
+      <Text>Tiempo restante: {timeLeft}s</Text>
+      <Text>Puntaje: {score}</Text>
+      <Button title="Aumentar puntaje" onPress={() => setScore(score + 1)} />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  timer: { fontSize: 20, marginBottom: 10 },
-  score: { fontSize: 18, marginBottom: 20 },
-  insect: {
-    position: 'absolute',
-    top: 200,
-    left: 100,
-  },
-});

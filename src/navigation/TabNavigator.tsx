@@ -9,7 +9,7 @@ export default function TabNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Juego" component={GameScreen} />
-      <Tab.Screen name="Puntaje" component={HighScoreScreen} />
+      <Tab.Screen name="Puntuaciones" component={HighScoreScreen} />
     </Tab.Navigator>
   );
 }
